@@ -24,11 +24,13 @@ router.get('/').get(async (req, res) => {
     }
 })
 
-// get post by id
+// create a post
 router.get('/').post(async (req, res) => {
     try {
         const { name, prompt, photo } = req.body;
+        // upload image asap so that photo wont be accidentally lost
         const photoUrl = await cloudinary.uploader.upload(photo);
+
         const newPost = await Post.create({
             name,
             prompt,
